@@ -4,6 +4,9 @@ package-lock.json
 *.log
 *.gz
 
+# dotenv
+.env
+
 # Coveralls
 .nyc_output
 coverage
