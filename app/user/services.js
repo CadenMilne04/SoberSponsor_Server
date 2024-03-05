@@ -1,33 +1,27 @@
 const User = require("../models/user.model")
+const Bcrypt = require("../middleware/bcrypt")
 
 const UserService = {
   getAllUsers() {
     // Logic to fetch all users from the database
   },
-  getUserById(id) {
-    // Logic to fetch a user by ID from the database
-    console.log("ID: ", id);
-    if(id == "abc123"){
-        return "cadenmilne04";
-    }
-    return null;
-  },
   async createUser(userData) {
-    const username = userData.username;
-    const password = userData.password;
+    const newUsername = userData.username;
+    const newPassword = userData.password;
 
-    if(password.length >= 10){
-        //Send User to database
-        try {
-            const user = await User.create({
-                username: username,
-                password: password,
-            });
-        } catch (error) {
-            return "Error Creating User";    
-        }
+    const newHashedPassword = await Bcrypt.hashPassword(newPassword);
+    if(newHashedPassword == null) return -1;
+
+    try {
+        await User.create({
+            username: newUsername,
+            password: newHashedPassword,
+        });
+    } catch (error) {
+        console.log(error);
+        return -2;    
     }
-    return null; 
+    return 1; 
   },
   updateUser(id, userData) {
     // Logic to update an existing user in the database

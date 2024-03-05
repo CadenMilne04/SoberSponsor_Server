@@ -2,26 +2,20 @@ const UserService = require('./services');
 
 const UserController = {
   getUsers(res) {
-    console.log("here");
-    res.send({status: "ok", user: "Caden"});
   },
-  getUserById(req, res) {
-    const id = req.query.id;
-    const user = UserService.getUserById(id);
-    if(user == null){
-        res.status(400).send("Invalid ID")
-    }
-    else
-        res.status(200).send(user)
-  },
-  createUser(req, res) {
+  async createUser(req, res) {
       const userData = req.body;
-      const user = UserService.createUser(userData);
-      if(user == null){
+
+      const result = await UserService.createUser(userData);
+
+      if(result == -1){
           res.status(500).send("Failed to create user.");
       }
-      else{
-          res.status(200).send(user);
+      else if(result == -2){
+          res.status(500).send("Database Error");
+      }
+      else if(result == 1){
+          res.status(200).send("Created new user");
       }
   },
   updateUser(req, res) {
