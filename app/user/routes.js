@@ -3,10 +3,12 @@ const UserController = require('./controllers');
 
 const router = express.Router();
 
-router.get('/', UserController.getUsers);
+//Token-less routes
 router.post('/', UserController.createUser);
-router.put('/:id', UserController.updateUser);
-router.delete('/:id', UserController.deleteUser);
+router.get('/sign-in', UserController.signInUser);
+
+//Token routes
+router.get('/username', UserController.getUsernameFromToken);
 
 module.exports = router;
 

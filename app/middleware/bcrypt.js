@@ -12,14 +12,11 @@ const Bcrypt = {
         }
     },
 
-    checkPassword(password, userHash){
-        bcrypt.compare(password, userHash, function(err, result) {
-            if(err) return err;
-            return result;
-        });
+    async checkPassword(password, userHash){
+        const result = await bcrypt.compare(password, userHash);
+        if(result == true) return true;
+        else throw Error("Invalid Password")
     }
 }
 
 module.exports = Bcrypt;
-
-    

@@ -1,27 +1,47 @@
 const UserService = require('./services');
 
 const UserController = {
-  getUsers(res) {
-  },
-  async createUser(req, res) {
+    async createUser(req, res) {
       const userData = req.body;
 
-      const result = await UserService.createUser(userData);
+      try {
+          const token = await UserService.createUser(userData);
+          res.status(200).send({
+              message: "New User Created",
+              token: token
+          });
+      } catch (error) {
+          res.status(500).send(error.message);
+      }
+    },
 
-      if(result == -1){
-          res.status(500).send("Failed to create user.");
+    async signInUser(req, res) {
+      const userData = req.body;
+
+      try {
+          const token = await UserService.signInUser(userData);
+          res.status(200).send({
+              message: "Signed in Successfully",
+              token: token
+          });
+      } catch (error) {
+          res.status(500).send(error.message);
       }
-      else if(result == -2){
-          res.status(500).send("Database Error");
-      }
-      else if(result == 1){
-          res.status(200).send("Created new user");
-      }
-  },
-  updateUser(req, res) {
-  },
-  deleteUser(req, res) {
-  }
+    },
+
+    async getUsernameFromToken(req, res){
+        const {token} = req.body;
+        try {
+            const username = await UserService.verifyJWT(token);
+              res.status(200).send({
+                  message: "Token authorized",
+                  username: username
+              });
+        } catch (error) {
+          res.status(500).send(error.message);
+        }
+    }
+
 };
 
 module.exports = UserController;
