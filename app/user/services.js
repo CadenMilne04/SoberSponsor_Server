@@ -28,11 +28,12 @@ const UserService = {
     async signInUser(userData){
         const username = userData.username;
         const password = userData.password;
-
+        console.log(password);
 
         try {
             //Find the user inside the database
             const user = await User.findOne({username: username});  
+            if(user == null) throw new Error("Couldn't find the user in the database");
 
             //Check to ensure that the password is correct
             await Bcrypt.checkPassword(password, user.password);
@@ -41,7 +42,6 @@ const UserService = {
             const token = JWT.createJWT(user);
             return token;
 
-            return user;
         } catch (error) {
             throw error;
         }

@@ -5,7 +5,7 @@ const router = express.Router();
 
 //Token-less routes
 router.post('/', UserController.createUser);
-router.get('/sign-in', UserController.signInUser);
+router.post('/sign-in', UserController.signInUser);
 
 //Token routes
 router.get('/username', UserController.getUsernameFromToken);
