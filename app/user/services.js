@@ -72,6 +72,14 @@ const UserService = {
 
     async updateLocation(username, date){
         await User.findOneAndUpdate({username: username},{quitDate: date});
+    },
+
+    async addJournalEntry(username, title, body){
+        const entry = {
+            title: title,
+            body: body,
+        }
+        await User.updateOne({username: username}, {$push: {journalEntries: entry}});
     }
 };
 

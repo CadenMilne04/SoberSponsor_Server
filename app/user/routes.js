@@ -7,6 +7,8 @@ const router = express.Router();
 router.post('/create', UserController.createUser);
 router.post('/sign-in', UserController.signInUser);
 
+router.patch('/journal/new', UserController.addJournalEntry);
+
 router.patch('/update/password', UserController.updatePassword);
 router.patch('/update/location', UserController.updateLocation);
 router.patch('/update/quit-date', UserController.updateQuitDate);

@@ -20,7 +20,15 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    journalEntries: [
+        {
+            date: {type: Date, default: Date.now},
+            title: {type: String},
+            body: {type: String},
+        }
+    ]
+
 }, { collection: "users" });
 
 // Create a User model from the schema
