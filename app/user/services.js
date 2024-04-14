@@ -16,7 +16,7 @@ const UserService = {
                 username: newUsername,
                 password: newHashedPassword,
                 location: "",
-                quitDate: null,
+                quitDate: Date.now(),
             });
 
             //Create and return a jsonwebtoken
