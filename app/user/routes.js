@@ -10,7 +10,7 @@ router.post('/sign-in', UserController.signInUser);
 router.post('/refresh-jwt', UserController.refreshJWT);
 
 router.patch('/journal/new', UserController.addJournalEntry);
-router.get('/journal/all', UserController.getJournalEntries);
+router.patch('/journal/all', UserController.getJournalEntries);
 
 router.patch('/update/password', UserController.updatePassword);
 router.patch('/update/location', UserController.updateLocation);
