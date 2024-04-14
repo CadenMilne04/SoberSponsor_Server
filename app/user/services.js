@@ -58,6 +58,19 @@ const UserService = {
         }
     },
 
+    async refreshJWT(token){
+        try {
+            //Verify the JWT and return the encoded username
+            const username = await JWT.verifyJWT(token);
+            const user = await User.findOne({username: username});  
+
+            const newToken = JWT.createJWT(user);
+            return newToken; 
+        } catch (error) {
+            throw error; 
+        }
+    },
+
     async updatePassword(username, password){
         const newHashedPassword = await Bcrypt.hashPassword(password);
 

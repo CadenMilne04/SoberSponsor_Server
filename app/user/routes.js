@@ -7,6 +7,8 @@ const router = express.Router();
 router.post('/create', UserController.createUser);
 router.post('/sign-in', UserController.signInUser);
 
+router.post('/refresh-jwt', UserController.refreshJWT);
+
 router.patch('/journal/new', UserController.addJournalEntry);
 router.get('/journal/all', UserController.getJournalEntries);
 

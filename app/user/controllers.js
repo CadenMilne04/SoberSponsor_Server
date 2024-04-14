@@ -42,6 +42,19 @@ const UserController = {
         }
     },
 
+    async getUsernameFromToken(req, res){
+        const {token} = req.body;
+        try {
+            const newToken = await UserService.refreshJWT(token);
+              res.status(200).send({
+                  message: "Token Refreshed",
+                  token: newToken
+              });
+        } catch (error) {
+          res.status(500).send(error.message);
+        }
+    },
+    
     async updatePassword(req, res){
         const {token, password} = req.body;
 
