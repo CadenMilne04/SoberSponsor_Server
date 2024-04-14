@@ -18,4 +18,5 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/user', require('./user/routes.js'))
+app.use('/api/meeting', require('./meeting/routes.js'))
 module.exports = app
