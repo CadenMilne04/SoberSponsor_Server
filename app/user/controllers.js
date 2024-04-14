@@ -88,7 +88,7 @@ const UserController = {
             const username = await UserService.verifyJWT(token);
 
             //update the DB entry with that username
-            await UserService.updateLocation(username, date);
+            await UserService.updateQuitDate(username, date);
 
               res.status(200).send({
                   message: "Quit Date Updated Successfully",

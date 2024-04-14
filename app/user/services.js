@@ -70,7 +70,7 @@ const UserService = {
         await User.findOneAndUpdate({username: username},{location: location});
     },
 
-    async updateLocation(username, date){
+    async updateQuitDate(username, date){
         await User.findOneAndUpdate({username: username},{quitDate: date});
     },
 
