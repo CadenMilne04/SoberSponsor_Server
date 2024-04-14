@@ -17,5 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(cors());
+
 app.use('/api/user', require('./user/routes.js'))
 module.exports = app
