@@ -11,6 +11,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    location: {
+        type: String,
+    },
+    quitDate: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now

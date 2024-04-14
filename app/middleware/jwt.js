@@ -5,7 +5,7 @@ const secret = process.env.JWT_PASSWORD;
  
 const JWT = {
     createJWT(user){
-        const token = jwt.sign({username: user.username}, secret);
+        const token = jwt.sign({username: user.username, location: user.location, quitDate: user.quitDate}, secret);
         return token;
     },
 

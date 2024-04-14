@@ -15,6 +15,8 @@ const UserService = {
             const user = await User.create({
                 username: newUsername,
                 password: newHashedPassword,
+                location: "",
+                quitDate: null,
             });
 
             //Create and return a jsonwebtoken
@@ -28,7 +30,6 @@ const UserService = {
     async signInUser(userData){
         const username = userData.username;
         const password = userData.password;
-        console.log(password);
 
         try {
             //Find the user inside the database
@@ -55,6 +56,22 @@ const UserService = {
         } catch (error) {
             throw error; 
         }
+    },
+
+    async updatePassword(username, password){
+        const newHashedPassword = await Bcrypt.hashPassword(password);
+
+        await User.findOneAndUpdate(
+                {username: username},
+                {password: newHashedPassword});
+    },
+
+    async updateLocation(username, location){
+        await User.findOneAndUpdate({username: username},{location: location});
+    },
+
+    async updateLocation(username, date){
+        await User.findOneAndUpdate({username: username},{quitDate: date});
     }
 };
 

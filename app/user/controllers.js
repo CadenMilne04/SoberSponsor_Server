@@ -40,6 +40,63 @@ const UserController = {
         } catch (error) {
           res.status(500).send(error.message);
         }
+    },
+
+    async updatePassword(req, res){
+        const {token, password} = req.body;
+
+        try {
+            //Get the username from the JWT
+            const username = await UserService.verifyJWT(token);
+
+            //update the DB entry with that username
+            await UserService.updatePassword(username, password);
+
+              res.status(200).send({
+                  message: "Password Updated Successfully",
+              });
+        } catch (error) {
+          res.status(500).send(error.message);
+        }
+
+    },
+
+    async updateLocation(req, res){
+        const {token, location} = req.body;
+
+        try {
+            //Get the username from the JWT
+            const username = await UserService.verifyJWT(token);
+
+            //update the DB entry with that username
+            await UserService.updateLocation(username, location);
+
+              res.status(200).send({
+                  message: "Location Updated Successfully",
+              });
+        } catch (error) {
+          res.status(500).send(error.message);
+        }
+
+    },
+
+    async updateQuitDate(req, res){
+        const {token, date} = req.body;
+
+        try {
+            //Get the username from the JWT
+            const username = await UserService.verifyJWT(token);
+
+            //update the DB entry with that username
+            await UserService.updateLocation(username, date);
+
+              res.status(200).send({
+                  message: "Quit Date Updated Successfully",
+              });
+        } catch (error) {
+          res.status(500).send(error.message);
+        }
+
     }
 
 };
