@@ -42,7 +42,7 @@ const UserController = {
         }
     },
 
-    async getUsernameFromToken(req, res){
+    async refreshJWT(req, res){
         const {token} = req.body;
         try {
             const newToken = await UserService.refreshJWT(token);
