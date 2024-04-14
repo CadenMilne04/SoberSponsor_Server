@@ -80,6 +80,11 @@ const UserService = {
             body: body,
         }
         await User.updateOne({username: username}, {$push: {journalEntries: entry}});
+    },
+
+    async getJournalEntries(username){
+        const user = await User.findOne({username: username});
+        return user.journalEntries;
     }
 };
 

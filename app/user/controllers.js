@@ -99,7 +99,6 @@ const UserController = {
 
     },
 
-
     async addJournalEntry(req, res){
         const {token, title, body} = req.body;
 
@@ -117,8 +116,27 @@ const UserController = {
           res.status(500).send(error.message);
         }
 
-    }
+    },
 
+    async getJournalEntries(req, res){
+        const {token} = req.body;
+
+        try {
+            //Get the username from the JWT
+            const username = await UserService.verifyJWT(token);
+
+            //update the DB entry with that username
+            const entries = await UserService.getJournalEntries(username);
+
+              res.status(200).send({
+                  message: "Entry Updated Successfully",
+                  entries: entries
+              });
+        } catch (error) {
+          res.status(500).send(error.message);
+        }
+
+    }
 };
 
 module.exports = UserController;
