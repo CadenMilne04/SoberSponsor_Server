@@ -11,12 +11,14 @@ const UserService = {
             //Hash the password
             const newHashedPassword = await Bcrypt.hashPassword(newPassword);
 
+            const now = new Date(Date.now());
+
             //Save the user to the database
             const user = await User.create({
                 username: newUsername,
                 password: newHashedPassword,
                 location: "",
-                quitDate: Date.now(),
+                quitDate: now
             });
 
             //Create and return a jsonwebtoken
