@@ -112,6 +112,26 @@ const UserController = {
 
     },
 
+    async getQuitDate(req){
+      const {token} = req.body;
+
+      try {
+        //Get the username from the JWT
+        const username = await UserService.verifyJWT(token);
+
+        //Update the DB entry with that username
+        await UserService.getQuitDate(username);
+
+        res.status(200).send({
+            message: "Quite Date Retrieved Successfully",
+            quitDate: quitDate
+        })
+      } catch (error) {
+        res.status(500).send(error.message);
+      }
+
+    },
+
     async addJournalEntry(req, res){
         const {token, title, body} = req.body;
 

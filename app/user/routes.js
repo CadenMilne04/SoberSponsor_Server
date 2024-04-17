@@ -18,6 +18,7 @@ router.patch('/update/quit-date', UserController.updateQuitDate);
 
 //Token routes
 router.get('/username', UserController.getUsernameFromToken);
+router.get('/quit-date', UserController.getQuitDate);
 
 module.exports = router;
 

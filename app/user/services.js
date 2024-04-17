@@ -87,6 +87,11 @@ const UserService = {
         await User.findOneAndUpdate({username: username},{quitDate: date});
     },
 
+    async getQuitDate(username){
+        const user = await User.findOne({username: username});
+        return user.quitDate;
+    }
+
     async addJournalEntry(username, title, body){
         const entry = {
             title: title,
